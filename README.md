@@ -40,43 +40,10 @@ Doing that by hand is slow and easy to get wrong. **Drishti-Sutra** (Sanskrit: *
 
 Drishti-Sutra is built from **three analysis modules** that sit on a shared foundation (ingestion and a case database) and feed one dashboard and report. Modules 1 and 2 *read* individual pieces of evidence. Module 3 *compares* everything they found.
 
-```mermaid
-flowchart TB
-    A["Evidence files / ZIP bundle"] --> B["Ingestion and provenance<br/>SHA-256 · classification · audit log"]
-    B --> M1
-    B --> M2
-    B --> LOG
+<div align="center">
+    <img src="screenshots/flowchart.png" >
+</div>
 
-    subgraph M1["MODULE 1 · Document Authenticator"]
-        direction TB
-        D1["Preprocess + OCR"] --> D2["Extract fields<br/>name · DOB · ID number"]
-        D2 --> D3["Decode QR and compare<br/>with printed text"]
-        D2 --> D4["Error Level Analysis<br/>compression-variance overlay"]
-    end
-
-    subgraph M2["MODULE 2 · Screenshot and Chat Analysis"]
-        direction TB
-        S1["Segment chat bubbles"] --> S2["Read sender · text · time"]
-        S2 --> S3["Check timestamp order"]
-        X1["Parse chat export"] --> X2["Messages · timestamps · amounts"]
-    end
-
-    LOG["Event-log parser<br/>time · actor · transaction · file events"]
-
-    M1 --> DB[("SQLite case database")]
-    M2 --> DB
-    LOG --> DB
-    DB --> M3
-
-    subgraph M3["MODULE 3 · Truth Engine"]
-        direction TB
-        T1["Entity resolution<br/>RapidFuzz linking"] --> T2["Contradiction rules<br/>6 deterministic checks"]
-        T2 --> T3["Timeline reconstruction"]
-        T2 --> T4["Evidence relationship graph"]
-    end
-
-    M3 --> OUT["Dashboard and report<br/>7 sections · HTML report · draft certificate"]
-```
 
 ### Foundation: ingestion and storage
 Evidence can be uploaded as individual files or a ZIP bundle. Each file is hashed with **SHA-256**, classified (identity document, chat screenshot, chat export, system log), registered with its provenance, and recorded in an **audit log**. Original files are preserved, and everything the modules produce is stored in **SQLite** through shared Pydantic models. This is what lets every finding be traced back to a specific file and hash.
