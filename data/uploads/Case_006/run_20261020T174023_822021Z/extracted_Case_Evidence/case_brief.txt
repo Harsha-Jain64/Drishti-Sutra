@@ -1,0 +1,10 @@
+CASE DS-003 - VENDOR PAYMENT DISPUTE (SYNTHETIC TRAINING CASE)
+
+Parties: Neha Verma (buyer) and Arjun Rao (vendor). All names, numbers and documents in this folder are fictional.
+
+Background: The vendor issued an invoice for the October batch. The buyer states the invoice was settled in two
+payments, an advance and a balance. The vendor disputes the amount of the balance. Each side supplied different
+records: identity documents, a chat screenshot, a chat export, and a device event log.
+
+Scope of review: compare the records for internal and cross-source consistency. Findings are indicators for human
+review and are not conclusions about any person.

@@ -1,0 +1,91 @@
+{
+  "case_id": "Case_DS_001",
+  "title": "Investigation of Financial Dispute & Evidence Authenticity",
+  "primary_entity": "Aarav Sharma",
+  "counterparty": "Vikram Patel",
+  "generated_timestamp": "2026-10-20T10:30:00Z",
+  "files": {
+    "synthetic_id_card.png": {
+      "sha256": "1d6e4133dc5afce850ca2dfc4f98530eee3411f74c72defa52baaffd9156e92c",
+      "size_bytes": 37827
+    },
+    "synthetic_pan_card.png": {
+      "sha256": "1eaccc539e3ec09e2242b570537f41f9246a55c1fabcbb4ce1d9a77c8aded808",
+      "size_bytes": 32713
+    },
+    "system_events.log": {
+      "sha256": "52c8af98b9f7f86d6d6f4b04eb8d73eb276165fd4d44ca9c45a0a7b953bf40d6",
+      "size_bytes": 715
+    },
+    "whatsapp_chat_export.txt": {
+      "sha256": "1f8affc42e5c55564470b65c6794b41346195541e6307c555bc66ca4efb42282",
+      "size_bytes": 240
+    },
+    "whatsapp_screenshot.png": {
+      "sha256": "e95f8a94772084ee67167cbc58a387cc73184eeb09ffafcb1947ce5a0edfa3d9",
+      "size_bytes": 27916
+    }
+  },
+  "ground_truth_anomalies": [
+    {
+      "type": "DOB_CROSS_DOCUMENT_MISMATCH",
+      "sources": [
+        "synthetic_pan_card.png",
+        "synthetic_id_card.png"
+      ],
+      "description": "PAN card shows DOB 1994-05-12, whereas National ID card text shows 1994-08-12.",
+      "severity": "HIGH"
+    },
+    {
+      "type": "QR_VS_PRINTED_MISMATCH",
+      "sources": [
+        "synthetic_id_card.png"
+      ],
+      "description": "The QR code on synthetic_id_card.png encodes DOB 1994-05-12, contradicting printed text 1994-08-12.",
+      "severity": "CRITICAL"
+    },
+    {
+      "type": "ELA_LOCALIZED_TAMPERING",
+      "sources": [
+        "synthetic_id_card.png"
+      ],
+      "description": "Error Level Analysis reveals high compression variance on the DOB region of the ID card.",
+      "severity": "HIGH"
+    },
+    {
+      "type": "CHRONOLOGICAL_INVERSION",
+      "sources": [
+        "whatsapp_screenshot.png"
+      ],
+      "description": "Message at 10:15 AM appears visually after a message at 10:16 AM in the screenshot.",
+      "severity": "HIGH"
+    },
+    {
+      "type": "AMOUNT_CONTRADICTION",
+      "sources": [
+        "whatsapp_screenshot.png",
+        "whatsapp_chat_export.txt",
+        "system_events.log"
+      ],
+      "description": "Screenshot claims Rs 50,000 transferred; chat export text claims Rs 5,000; bank transaction log confirms Rs 50,000.00 transferred.",
+      "severity": "CRITICAL"
+    },
+    {
+      "type": "MISSING_MESSAGE_IN_EXPORT",
+      "sources": [
+        "whatsapp_screenshot.png",
+        "whatsapp_chat_export.txt"
+      ],
+      "description": "Message 'Sure, doing it right now.' present in screenshot is absent in the exported chat file.",
+      "severity": "MEDIUM"
+    },
+    {
+      "type": "UNAUTHORIZED_DB_MODIFICATION",
+      "sources": [
+        "system_events.log"
+      ],
+      "description": "WhatsApp msgstore.db modified at 10:18:22 AM following bank transaction, indicating post-facto tampering.",
+      "severity": "HIGH"
+    }
+  ]
+}

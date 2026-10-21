@@ -1,0 +1,13 @@
+streamlit
+opencv-python-headless
+Pillow
+PyMuPDF
+pytesseract
+pyzbar
+rapidfuzz
+networkx
+plotly
+pydantic>=2.0.0
+pytest
+jinja2
+qrcode[pil]

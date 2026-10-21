@@ -1,0 +1,7 @@
+[12/10/2026, 11:01:12 AM] Arjun Rao: Invoice for the October batch is ready: Rs 120,000
+[12/10/2026, 11:05:20 AM] Neha Verma: I will pay an advance of Rs 40,000 first.
+[12/10/2026, 11:09:05 AM] Neha Verma: Advance of Rs 40,000 sent, please check.
+[12/10/2026, 11:12:44 AM] Arjun Rao: Received. Please send the balance by evening.
+[12/10/2026, 02:44:20 PM] Neha Verma: Sending the balance of Rs 80,000 now.
+[12/10/2026, 02:47:05 PM] Neha Verma: Balance Rs 8,000 transferred, ref ending 4471.
+[12/10/2026, 03:30:10 PM] Arjun Rao: Will share it along with the dispatch.
